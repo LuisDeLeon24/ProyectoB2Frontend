@@ -1,14 +1,15 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {login as loginRequest} from "../../services";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login as loginRequest } from "../../services"
 import toast from "react-hot-toast";
 
 export const useLogin = () => {
-    const[isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const login = async (email,password) => {
+    const navigate = useNavigate()
+
+    const login = async (email, password) => {
 
         setIsLoading(true)
 
@@ -18,16 +19,18 @@ export const useLogin = () => {
         })
 
         setIsLoading(false)
+
         if(response.error){
-            return toast.error(response.error?.response?.data || 'Ocurrio un error en la ejecucion');
+            return toast.error(response.error?.response?.data || 'Ocurrio un error al iniciar sesión, intenta de nuevo')
         }
 
-        const{userDetails} = response.data
-        localStorage.setItem('user',JSON.stringify(userDetails));
+        const { userDetails } = response.data
 
-        navigate('/');
+        localStorage.setItem('user', JSON.stringify(userDetails));
+
+        navigate('/')
     }
-    return{
+    return {
         login,
         isLoading
     }
