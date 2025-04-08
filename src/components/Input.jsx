@@ -40,7 +40,7 @@ export const Input =({
                     onBlur={handleInputBlur}
                     />
                 )}
-                <span classname="auth-form-validation-message">
+                <span className="auth-form-validation-message">
                     {showErrorMessage && validationMessage}
                 </span>
             </div>
